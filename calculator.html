@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Calculator</title>
+
+    <link rel="stylesheet" href="styles/calculator.css" />
+  </head>
+ 
+  <body>
+    <main class="page">
+      <section class="calculator" aria-label="Calculator">
+        <div class="display" aria-live="polite">
+          <div class="display-history" id="history"></div>
+          <div class="display-value" id="display">0</div>
+        </div>
+
+        <!-- Keypad (buttons) -->
+        <div class="keypad" role="group" aria-label="Calculator keypad">
+          <button class="btn btn--secondary" type="button" data-action="clear">AC</button>
+          <button class="btn btn--secondary" type="button" data-action="delete">DEL</button>
+          <button class="btn btn--secondary" type="button" data-action="percent">%</button>
+          <button class="btn btn--operator" type="button" data-action="operator" data-value="/">÷</button>
+
+          <button class="btn" type="button" data-action="digit" data-value="7">7</button>
+          <button class="btn" type="button" data-action="digit" data-value="8">8</button>
+          <button class="btn" type="button" data-action="digit" data-value="9">9</button>
+          <button class="btn btn--operator" type="button" data-action="operator" data-value="*">×</button>
+
+          <button class="btn" type="button" data-action="digit" data-value="4">4</button>
+          <button class="btn" type="button" data-action="digit" data-value="5">5</button>
+          <button class="btn" type="button" data-action="digit" data-value="6">6</button>
+          <button class="btn btn--operator" type="button" data-action="operator" data-value="-">-</button>
+
+          <button class="btn" type="button" data-action="digit" data-value="1">1</button>
+          <button class="btn" type="button" data-action="digit" data-value="2">2</button>
+          <button class="btn" type="button" data-action="digit" data-value="3">3</button>
+          <button class="btn btn--operator" type="button" data-action="operator" data-value="+">+</button>
+
+          <button class="btn btn--wide" type="button" data-action="digit" data-value="0">0</button>
+          <button class="btn" type="button" data-action="decimal" data-value=".">.</button>
+          <button class="btn btn--equals" type="button" data-action="equals">=</button>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="scripts/calculator.js"></script>
+  </body>
+</html>
