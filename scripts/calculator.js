@@ -35,6 +35,10 @@ function resetInputFlagsFromText(text) {
 function clearAll() {
   currentInput = "0";
   hasDecimal = false;
+  firstNumber = null;
+  pendingOperator = null;
+  waitingForSecondNumber = null;
+
   setDisplay(currentInput);
   setHistory("");
 }
@@ -236,6 +240,86 @@ keypadEl.addEventListener("click", (event) => {
 
   setHistory(`Clicked: ${action} ${value}`.trim());
 });
+
+/* ===========================
+   Step 4: Keyboard support (AZERTY-friendly)
+   =========================== */
+
+function getDigitFromEvent(event) {
+  // 1) Cas simple: event.key est déjà un chiffre (souvent sur numpad ou clavier US)
+  if (event.key >= "0" && event.key <= "9") {
+    return event.key;
+  }
+
+  // 2) Cas AZERTY: on utilise event.code (la touche physique)
+  // Digit1..Digit0 (rangée du haut) + Numpad1..Numpad0
+  const code = event.code;
+
+  if (code.startsWith("Digit")) {
+    return code.replace("Digit", "");
+  }
+
+  if (code.startsWith("Numpad")) {
+    const rest = code.replace("Numpad", "");
+    if (rest >= "0" && rest <= "9") return rest;
+  }
+
+  return null;
+}
+
+function handleKeydown(event) {
+  const digit = getDigitFromEvent(event);
+  if (digit !== null) {
+    event.preventDefault();
+    appendDigit(digit);
+    return;
+  }
+
+  if (event.key === "." || event.key === ",") {
+    event.preventDefault();
+    appendDecimal();
+    return;
+  }
+
+  if (event.key === "+" || event.key === "-" || event.key === "*" || event.key === "/") {
+    event.preventDefault();
+    chooseOperator(event.key);
+    return;
+  }
+
+  if (event.key === "x" || event.key === "X") {
+    event.preventDefault();
+    chooseOperator("*");
+    return;
+  }
+
+  if (event.key === "Enter" || event.key === "=") {
+    event.preventDefault();
+    equals();
+    return;
+  }
+
+  if (event.key === "Backspace") {
+    event.preventDefault();
+    deleteOne();
+    return;
+  }
+
+  if (event.key === "Escape") {
+    event.preventDefault();
+    clearAll();
+    return;
+  }
+
+  if (event.key === "%") {
+    event.preventDefault();
+    percent();
+    return;
+  }
+}
+
+window.addEventListener("keydown", handleKeydown, true);
+
 
 setDisplay(currentInput);
 setHistory("");

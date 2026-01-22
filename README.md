@@ -19,3 +19,11 @@ This PR adds the initial calculator skeleton.
 - Added operators (+, −, ×, ÷) and equals evaluation.
 - Added delete (DEL) and percent (%).
 - Added basic error handling (division by zero).
+
+## Step 4 — Keyboard Support (AZERTY)
+
+This step adds keyboard controls to the calculator so it works naturally with:
+- AZERTY keyboards (top row keys),
+- Numpad digits,
+- common operator keys (+ - * /),
+- Enter for equals, Backspace for delete, Escape for clear.
