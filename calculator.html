@@ -11,6 +11,17 @@
   <body>
     <main class="page">
       <section class="calculator" aria-label="Calculator">
+        <header class="calculator-top">
+          <h1 class="calculator-title">Calculator</h1>
+
+          <button
+            id="themeToggle"
+            class="btn btn--secondary btn--theme"
+            type="button"
+            aria-pressed="false">
+            Dark mode
+          </button>
+        </header>
         <div class="display" aria-live="polite">
           <div class="display-history" id="history"></div>
           <div class="display-value" id="display">0</div>

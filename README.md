@@ -20,10 +20,14 @@ This PR adds the initial calculator skeleton.
 - Added delete (DEL) and percent (%).
 - Added basic error handling (division by zero).
 
-## Step 4 — Keyboard Support (AZERTY)
+### Step 4 — Keyboard Support (AZERTY)
 
 This step adds keyboard controls to the calculator so it works naturally with:
 - AZERTY keyboards (top row keys),
 - Numpad digits,
 - common operator keys (+ - * /),
 - Enter for equals, Backspace for delete, Escape for clear.
+
+### Step 5 — Styling + Dark mode
+- Polished the UI (spacing, borders, shadows, button states).
+- Added a dark theme while keeping the layout readable.

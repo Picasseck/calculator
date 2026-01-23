@@ -1,6 +1,8 @@
 const displayEl = document.getElementById("display");
 const historyEl = document.getElementById("history");
 const keypadEl = document.querySelector(".keypad");
+const themeToggleEl = document.getElementById("themeToggle");
+const THEME_KEY = "calculator-theme";
 
 let currentInput = "0";
 
@@ -241,18 +243,12 @@ keypadEl.addEventListener("click", (event) => {
   setHistory(`Clicked: ${action} ${value}`.trim());
 });
 
-/* ===========================
-   Step 4: Keyboard support (AZERTY-friendly)
-   =========================== */
 
 function getDigitFromEvent(event) {
-  // 1) Cas simple: event.key est déjà un chiffre (souvent sur numpad ou clavier US)
   if (event.key >= "0" && event.key <= "9") {
     return event.key;
   }
 
-  // 2) Cas AZERTY: on utilise event.code (la touche physique)
-  // Digit1..Digit0 (rangée du haut) + Numpad1..Numpad0
   const code = event.code;
 
   if (code.startsWith("Digit")) {
@@ -323,3 +319,30 @@ window.addEventListener("keydown", handleKeydown, true);
 
 setDisplay(currentInput);
 setHistory("");
+
+function applyTheme(theme) {
+  document.body.dataset.theme = theme;
+
+  const isDark = theme === "dark";
+  themeToggleEl.setAttribute("aria-pressed", String(isDark));
+  themeToggleEl.textContent = isDark ? "Light mode" : "Dark mode";
+}
+
+function getInitialTheme() {
+  const saved = localStorage.getItem(THEME_KEY);
+  if (saved === "dark" || saved === "light") return saved;
+
+  const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+  return prefersDark ? "dark" : "light";
+}
+
+const initialTheme = getInitialTheme();
+applyTheme(initialTheme);
+
+themeToggleEl.addEventListener("click", () => {
+  const current = document.body.dataset.theme || "light";
+  const next = current === "dark" ? "light" : "dark";
+
+  localStorage.setItem(THEME_KEY, next);
+  applyTheme(next);
+});
