@@ -1,3 +1,29 @@
+:root {
+  --border: #ddd;
+  --bg: #f6f6f6;
+  --card: #fff;
+  --text: #0f172a;
+  --muted: #666;
+
+  --yellow: #ffd814;
+  --yellow-hover: #f7ca00;
+
+  --focus: #2b7cff;
+}
+
+body[data-theme="dark"] {
+  --border: rgba(255, 255, 255, 0.12);
+  --bg: #0b1220;
+  --card: #101a2f;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+
+  --yellow: #ffd814;
+  --yellow-hover: #f7ca00;
+
+  --focus: #60a5fa;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -5,7 +31,9 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f6f6f6;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 200ms ease, color 200ms ease;
 }
 
 .page {
@@ -17,22 +45,28 @@ body {
 
 .calculator {
   width: min(420px, 100%);
-  background: #fff;
-  border: 1px solid #ddd;
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
 .display {
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 12px;
+  background: rgba(244, 245, 245, 0.901);
+}
+
+body[data-theme="dark"] .display {
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .display-history {
   min-height: 18px;
   font-size: 13px;
-  color: #666;
+  color: var(--muted);
   text-align: right;
 }
 
@@ -66,4 +100,59 @@ body {
 
 .btn--wide {
   grid-column: span 2;
+}
+
+.btn:hover {
+  background: #f6f6f6;
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(43, 124, 255, 0.2);
+  border-color: var(--focus);
+}
+
+.btn--secondary {
+  background: #f3f4f6;
+}
+
+.btn--operator {
+  background: #fff7d6;
+}
+
+.btn--equals {
+  background: var(--yellow);
+  border-color: #d5c200;
+}
+
+.btn--equals:hover {
+  background: var(--yellow-hover);
+}
+
+.display-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.calculator-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.calculator-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: var(--muted);
+}
+
+.btn--theme {
+  height: 40px;
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 800;
 }
